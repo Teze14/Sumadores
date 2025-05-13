@@ -1,0 +1,18 @@
+-- Jesus Emiliano García Jiménez 
+-- A01751766
+-- Full Adder Manchester Carry Chain
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity FA_Manchester is 
+	port( A, B, Ci: in std_logic; --definimos A, B como entradas "binarias"
+		   S, Co:out std_logic);
+end entity;
+
+architecture RTL of FA_Manchester is
+	-- aquí es donde se definen señales, variables, etc
+	begin
+		S  <= A xor B;
+		Co <= A and B;
+end architecture;
