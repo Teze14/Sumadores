@@ -1,0 +1,2 @@
+CSKA_Block : Bloque para CSKA variable
+CSKA_variable : Sumador modular de CSKA
