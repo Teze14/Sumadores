@@ -1,0 +1,18 @@
+-- Jesus Emiliano García Jiménez oooooooooooooo
+-- A01751766
+-- Descripción del archivo
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity HA is 
+	port( A, B: in std_logic; --definimos A, B como entradas "binarias"
+		   S, Co:out std_logic);
+end entity;
+
+architecture RTL of HA is
+	-- aquí es donde se definen señales, variables, etc
+	begin
+		S  <= A xor B;
+		Co <= A and B;
+end architecture;
