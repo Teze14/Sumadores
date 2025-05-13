@@ -1,0 +1,50 @@
+-- Jesus Emiliano García Jiménez 
+-- A01751766
+-- Archivo Sumador del bloque Carry Skip Adder
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity CSKA_Block is 
+	generic (N :integer :=8);
+	port( A, B : in std_logic_vector(N-1 downto 0);
+			Ci   : in std_logic;
+		   S    : out std_logic_vector(N-1 downto 0);
+			Co   : out std_logic;
+			PG   : out std_logic);
+end entity;
+
+architecture RTL of CSKA_Block is
+	--declaramos componentes
+	
+	component FA is 
+		port( A, B, Cin : in std_logic; 
+		      S, Co: out std_logic);
+	end component;
+	
+	-- declaramos las señales necesarias
+	signal c: std_logic_vector(N downto 0);
+	signal P: std_logic_vector(N-1 downto 0);
+	
+	begin
+			c(0) <= Ci;
+			
+			RCA : for i in 0 to N-1 generate
+				inst: FA port map (A(i), B(i), c(i),  S(i), c(i+1));
+				P(i) <= A(i) xor B(i); --Prpagate de cada bit
+			end generate;
+			
+	process(P)
+			variable temp: std_logic := '1';
+			begin
+			 for i in 0 to N-1 loop
+				temp := P(i) and temp; 
+			 end loop;
+			 PG <= temp;
+	end process;
+	
+	--Carry out del bloque
+	Co <= c(N);
+	
+end architecture;
+
